@@ -15,7 +15,6 @@
 //#include "fftw3_mkl.h"
 
 #include <complex>
-using namespace std;
 typedef complex<double> Complex;
 //******************************
 
