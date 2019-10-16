@@ -15,7 +15,7 @@
 //#include "fftw3_mkl.h"
 
 #include <complex>
-typedef complex<double> Complex;
+typedef std::complex<double> Complex;
 //******************************
 
 /** \brief Provides functions to construct a %DVR wavefunction for the excess electron.
