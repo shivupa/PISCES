@@ -27,14 +27,14 @@ void InvertMatrix(int n, double *A);
 
 //////////////////////////////////////////////////////////////
 ///
-///   InvA = (alpha^-1 - T)^-1 
+///   \f$A^{-1} = (\alpha^{-1} - T)^{-1}\f$ 
 ///
 ///   this is the matrix that can be multiplied with the electric field at
 ///   the polarizable sites to yield the induced dipoles:
 ///
-///   mu = InvA * E
+///   \f$\mu = A^{-1} * E\f
 ///
-///   dim(A) = 3*nSiyes x 3*nSites
+///   dim(A) = 3*nSites x 3*nSites
 ///
 void ComputeInvA(int nSites, const double *R, const double *alpha, double aThole, double *InvA, int verbose)
 {
@@ -80,14 +80,14 @@ void ComputeInvA(int nSites, const double *R, const double *alpha, double aThole
 
 //////////////////////////////////////////////////////////////
 ///
-///  build matrix A = (alpha^-1 - T)
+///  build matrix \f$A = (\alpha^{-1} - T)\f$
 ///
 ///  this is a super matrix
-///  each diagonal 3x3 block has alpha^-1 on its diagonal
-///  each off-diagonal 3x3 block is the dipole-dipole tensor Tij
-///  as each Tij block is symmetric, the whole matrix is symmetric 
+///  each diagonal 3x3 block has \f$\alpha^{-1}\f$ on its diagonal
+///  each off-diagonal 3x3 block is the dipole-dipole tensor \f$T_{ij}\f$
+///  as each \f$T_{ij}\f$ block is symmetric, the whole matrix is symmetric 
 ///
-///   dim(A) = 3*nSiyes x 3*nSites
+///   dim(A) = 3*nSites x 3*nSites
 ///
 ///   input:  nSites        : no of point polarizable atoms
 ///           R[3*nSites]   : position of sites
