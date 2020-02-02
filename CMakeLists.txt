@@ -123,7 +123,6 @@ if ( PISCES_DOCS )
   add_subdirectory( doc )
 endif ( PISCES_DOCS )
 
-
 # Documentation block
 option( PISCES_PERFTOOLS "Copy performance tools" OFF)
 if ( PISCES_PERFTOOLS )
