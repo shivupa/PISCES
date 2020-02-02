@@ -17,7 +17,7 @@
 ///   and \f$BV\f$ are the associated approximations for the eigenvectors of \f$H\f$
 ///
 ///////////////////////////////////////////////////////////////////////////////
-#include <cstdio>
+#include <stdio.h>
 #include <cstdlib>
 #include <cmath>
 #include <iostream>

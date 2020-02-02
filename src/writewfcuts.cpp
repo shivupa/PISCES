@@ -9,7 +9,7 @@
 //
 //  the filenames are POTENTIAL, WAVEFN1, ....
 //
-#include <cstdio>
+#include <stdio.h>
 #include <cstdlib>
 #include <cstring>
 #include <cmath>

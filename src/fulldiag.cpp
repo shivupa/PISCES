@@ -4,7 +4,7 @@
 //  build the Hamilton matrix in hmat[ng*ng]
 //  and diagonalise it with a LAPACK routine
 //
-#include <cstdio> 
+#include <stdio.h> 
 #include <stdexcept>
 #include <sstream>
 #include "constants.h"

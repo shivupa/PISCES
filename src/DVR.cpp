@@ -7,7 +7,7 @@
 //  and many parts work, or make even sense, only in 3D.
 //
 
-#include <cstdio>
+#include <stdio.h>
 #include <cstdlib>
 #include <cstring>
 #include <cmath>

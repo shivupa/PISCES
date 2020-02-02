@@ -1,4 +1,4 @@
-
+#include "Potential.h"
 
 double Potential::EvaluateCoroleneElecPot(const double *x)
 { 

@@ -1,5 +1,5 @@
 #include <cstdlib>
-#include <cstdio>
+#include <stdio.h>
 #include <cmath>
 #include <ctime>
 #include <vector>

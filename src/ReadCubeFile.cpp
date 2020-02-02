@@ -1,6 +1,6 @@
 //  reading Gaussian-cube-file format
 
-#include <cstdio>
+#include <stdio.h>
 #include <cstdlib>
 #include <cmath>
 #include <cstring>

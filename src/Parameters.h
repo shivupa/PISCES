@@ -1,3 +1,5 @@
+#include "vecdefs.h"
+
 //TS
 //    collecting many of the parameters for WaterCluster in one struct
 //    rudimentary documentation is in Parameters::Print() 

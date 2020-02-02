@@ -8,7 +8,7 @@
 ///    int corrflag: which corrections vectors: 0, 1, or 2 see doc in Davidson.cpp
 ///    double *ev  : computed energy
 ///
-#include <cstdio>
+#include <stdio.h>
 #include <cstdlib>
 #include <cmath>
 #include <iostream>

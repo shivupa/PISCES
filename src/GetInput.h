@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "vecdefs.h"
 void GetInputParameters(Parameters &P, TSIN Input);
 void GetWaterCoordinates(int nw, char **coorlines, double *WaterPos);
