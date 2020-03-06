@@ -1,8 +1,16 @@
-add_library( PISCES_F_SRC
-  ../src/lbfgs.f
-  )
+file(GLOB UNIT_TESTS_SRC
+    "unit_tests/*/*.cpp"
+)
+file(GLOB INTEGRATION_TESTS_SRC
+    "integration_tests/*/*.cpp"
+)
+file(GLOB REGRESSION_TESTS_SRC
+    "regression_tests/*/*.cpp"
+)
 
-set(PISCES_SRC
+
+set( pisces_src 
+#  ../src/amoeba.c
   ../src/C60.cpp
   ../src/ChargeDipPol.cpp
   ../src/ClusterAnion.cpp
@@ -30,6 +38,7 @@ set(PISCES_SRC
   ../src/Potential.cpp
   ../src/pisces.cpp
   ../src/potfit.cpp
+#  ../src/Powell.cpp
   ../src/ReadCubeFile.cpp
   ../src/sine_dvr.cpp
   ../src/Small2Large.cpp
@@ -38,27 +47,13 @@ set(PISCES_SRC
   ../src/VectorFFTW.cpp
   ../src/Water.cpp
   ../src/WriteCubeFile.cpp
-)
-
-file(GLOB UNIT_TESTS_SRC
-    "unit_tests/*/*.cpp"
-)
-file(GLOB INTEGRATION_TESTS_SRC
-    "integration_tests/*/*.cpp"
-)
-file(GLOB REGRESSION_TESTS_SRC
-    "regression_tests/*/*.cpp"
-)
-
+  )
 
 ##############################################################################################################
 # Do all the searching for pisces libraries
-add_executable(PISCES_TESTS ${UNIT_TESTS_SRC} ${INTEGRATION_TESTS_SRC} ${REGRESSION_TESTS_SRC} ${PISCES_SRC} )
+add_executable(PISCES_TESTS doctest_main.cpp ${UNIT_TESTS_SRC} ${INTEGRATION_TESTS_SRC} ${REGRESSION_TESTS_SRC} ${pisces_src} )
+target_link_libraries(PISCES_TESTS piscesf)
 
-target_link_libraries(PISCES_TESTS PISCES_F_SRC)
-
-
-find_package( OpenMP )
 if ( OPENMP_FOUND )
 set_property( 
   TARGET  PISCES_TESTS 
@@ -73,31 +68,18 @@ set_property(
 else ( OPENMP_FOUND )
 message(STATUS "Warning: Parallelization disabled. Compiler doesn't support OpenMP")
 endif ( OPENMP_FOUND )
-set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/site-macros/Modules )
-find_package( BLAS REQUIRED )
-find_package( LAPACK REQUIRED )
-#find_package( FORTRANRTL REQUIRED )
-find_package( Threads )  # for lapack on some platforms
-# todo: cross platform and compiler check this:
-list(APPEND LAPACK_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} )
-find_package(FFTW)
+
 if(FFTW_FOUND)
   set_property(DIRECTORY PROPERTY COMPILE_DEFINITIONS HAVE_FFTW)
   include_directories(${FFTW_INCLUDES})
   target_link_libraries(PISCES_TESTS ${FFTW_LIBRARY} ${FFTW_OMP_LIBRARY})
 endif(FFTW_FOUND)
-find_package(ARPACK)
 if(ARPACK_FOUND)
   set_property(DIRECTORY PROPERTY COMPILE_DEFINITIONS HAVE_ARPACK)
   target_link_libraries(PISCES_TESTS ${ARPACK_LIBRARY})
 endif(ARPACK_FOUND)
-
-
-
-
 target_link_libraries( PISCES_TESTS ${LAPACK_LIBRARIES} )
-##############################################################################################################
-find_package(doctest REQUIRED)
-target_link_libraries( PISCES_TESTS doctest::doctest )
+target_link_libraries(PISCES_TESTS doctest::doctest)
+target_include_directories(PISCES_TESTS PUBLIC include)
 include(doctest)
 doctest_discover_tests(PISCES_TESTS)
