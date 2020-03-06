@@ -36,7 +36,7 @@ set( pisces_src
   ../src/Parameters.cpp
   ../src/polplot.cpp
   ../src/Potential.cpp
-  ../src/pisces.cpp
+#  ../src/pisces.cpp
   ../src/potfit.cpp
 #  ../src/Powell.cpp
   ../src/ReadCubeFile.cpp
