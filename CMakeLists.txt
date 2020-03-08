@@ -140,8 +140,7 @@ endif( PISCES_OPENMP )
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
-      "Choose the type of build, options are: Debug Release
-RelWithDebInfo MinSizeRel."
+      "Choose the type of build, options are: Debug Release."
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
