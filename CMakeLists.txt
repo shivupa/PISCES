@@ -26,7 +26,7 @@ add_library( piscesf
   )
 
 # add source
-set( src 
+add_library( pisces_src 
 #  src/amoeba.c
   src/C60.cpp
   src/ChargeDipPol.cpp
@@ -53,7 +53,7 @@ set( src
   src/Parameters.cpp
   src/polplot.cpp
   src/Potential.cpp
-  src/pisces.cpp
+#  src/pisces.cpp
   src/potfit.cpp
 #  src/Powell.cpp
   src/ReadCubeFile.cpp
@@ -65,6 +65,7 @@ set( src
   src/Water.cpp
   src/WriteCubeFile.cpp
   )
+target_link_libraries( pisces_src piscesf )
 
 # add headers for VisualStudio and friends
 if ( WIN32 ) 
@@ -75,12 +76,13 @@ endif()
 
 add_executable( pisces
   ${headers}
-  ${src}
+  src/pisces.cpp
+  #  ${src}
 )
   
 include_directories( ${PROJECT_SOURCE_DIR}/ext )
 #target_link_libraries( pisces piscesf ${FORTRANRTL_LIBRARIES} ${LAPACK_LIBRARIES} )
-target_link_libraries( pisces piscesf  ${FORTRANRTL_LIBRARIES} ${LAPACK_LIBRARIES} )
+target_link_libraries( pisces piscesf pisces_src ${FORTRANRTL_LIBRARIES} ${LAPACK_LIBRARIES} )
 # ARPACK
 # to help CMake find ARPACK, add
 # -DARPACK_PATH=/path/to/arpack

@@ -9,50 +9,50 @@ file(GLOB REGRESSION_TESTS_SRC
 )
 
 
-set( pisces_src 
-#  ../src/amoeba.c
-  ../src/C60.cpp
-  ../src/ChargeDipPol.cpp
-  ../src/ClusterAnion.cpp
-  ../src/cm_dvr.cpp
-  ../src/DPP.cpp
-  ../src/DVR.cpp
-  ../src/davdriver.cpp
-  ../src/Davidson.cpp
-  ../src/DerivDDTensor.cpp
-  ../src/GetInput.cpp
-  ../src/GeoAux.cpp
-  ../src/Gradients.cpp
-  ../src/fulldiag.cpp
-  ../src/ho_dvr.cpp
-  ../src/KE_diag.cpp
-  ../src/larnoldi.cpp
-  ../src/Model_pot.cpp
-  ../src/Molecule.cpp
-  ../src/MolPolAux.cpp
-  ../src/mtx.cpp
-  ../src/NaCl.cpp
-  ../src/optimize.cpp
-  ../src/Parameters.cpp
-  ../src/polplot.cpp
-  ../src/Potential.cpp
-#  ../src/pisces.cpp
-  ../src/potfit.cpp
-#  ../src/Powell.cpp
-  ../src/ReadCubeFile.cpp
-  ../src/sine_dvr.cpp
-  ../src/Small2Large.cpp
-  ../src/tsin.cpp
-  ../src/vtx_FFT.cpp
-  ../src/VectorFFTW.cpp
-  ../src/Water.cpp
-  ../src/WriteCubeFile.cpp
-  )
+#set( pisces_src 
+##  ../src/amoeba.c
+#  ../src/C60.cpp
+#  ../src/ChargeDipPol.cpp
+#  ../src/ClusterAnion.cpp
+#  ../src/cm_dvr.cpp
+#  ../src/DPP.cpp
+#  ../src/DVR.cpp
+#  ../src/davdriver.cpp
+#  ../src/Davidson.cpp
+#  ../src/DerivDDTensor.cpp
+#  ../src/GetInput.cpp
+#  ../src/GeoAux.cpp
+#  ../src/Gradients.cpp
+#  ../src/fulldiag.cpp
+#  ../src/ho_dvr.cpp
+#  ../src/KE_diag.cpp
+#  ../src/larnoldi.cpp
+#  ../src/Model_pot.cpp
+#  ../src/Molecule.cpp
+#  ../src/MolPolAux.cpp
+#  ../src/mtx.cpp
+#  ../src/NaCl.cpp
+#  ../src/optimize.cpp
+#  ../src/Parameters.cpp
+#  ../src/polplot.cpp
+#  ../src/Potential.cpp
+##  ../src/pisces.cpp
+#  ../src/potfit.cpp
+##  ../src/Powell.cpp
+#  ../src/ReadCubeFile.cpp
+#  ../src/sine_dvr.cpp
+#  ../src/Small2Large.cpp
+#  ../src/tsin.cpp
+#  ../src/vtx_FFT.cpp
+#  ../src/VectorFFTW.cpp
+#  ../src/Water.cpp
+#  ../src/WriteCubeFile.cpp
+#  )
 
 ##############################################################################################################
 # Do all the searching for pisces libraries
-add_executable(PISCES_TESTS doctest_main.cpp ${UNIT_TESTS_SRC} ${INTEGRATION_TESTS_SRC} ${REGRESSION_TESTS_SRC} ${pisces_src} )
-target_link_libraries(PISCES_TESTS piscesf)
+add_executable(PISCES_TESTS doctest_main.cpp ${UNIT_TESTS_SRC} ${INTEGRATION_TESTS_SRC} ${REGRESSION_TESTS_SRC} ) # ${pisces_src} )
+target_link_libraries(PISCES_TESTS piscesf pisces_src)
 
 if ( OPENMP_FOUND )
 set_property( 
