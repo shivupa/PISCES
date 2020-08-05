@@ -16,7 +16,24 @@ find_package( LAPACK REQUIRED )
 find_package( Threads )  # for lapack on some platforms
 # todo: cross platform and compiler check this:
 list(APPEND LAPACK_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} )
-find_package(doctest REQUIRED)
+find_package(doctest)
+if(NOT doctest_FOUND)
+    ExternalProject_Add(
+        doctest
+        PREFIX ${CMAKE_BINARY_DIR}/doctest
+        GIT_REPOSITORY https://github.com/onqtam/doctest.git
+        TIMEOUT 10
+        UPDATE_COMMAND ${GIT_EXECUTABLE} pull
+        CONFIGURE_COMMAND ""
+        BUILD_COMMAND ""
+        INSTALL_COMMAND ""
+        LOG_DOWNLOAD ON
+    )
+    
+    # Expose required variable (DOCTEST_INCLUDE_DIR) to parent scope
+    ExternalProject_Get_Property(doctest source_dir)
+    set(DOCTEST_INCLUDE_DIR ${source_dir}/doctest CACHE INTERNAL "Path to include folder for doctest")
+endif(doctest_FOUND)
 # ==============================================================================
 #  SOURCE AND TARGET
 # ==============================================================================
