@@ -18,6 +18,8 @@ find_package( Threads )  # for lapack on some platforms
 list(APPEND LAPACK_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} )
 find_package(doctest)
 if(NOT doctest_FOUND)
+    include(ExternalProject)
+    find_package(Git REQUIRED)
     ExternalProject_Add(
         doctest
         PREFIX ${CMAKE_BINARY_DIR}/doctest
