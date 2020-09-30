@@ -1,26 +1,44 @@
 project( Pisces_Project C CXX Fortran )
 cmake_minimum_required(VERSION 2.6)
 
-# 
-
+# ==============================================================================
+#   MACROS
+# ==============================================================================
+Include(FetchContent)
+# FetchContent_MakeAvailable is only availible in CMake 3.14+
+# This macro mimics the behavior
+if(${CMAKE_VERSION} VERSION_LESS 3.14)
+    macro(FetchContent_MakeAvailable NAME)
+        FetchContent_GetProperties(${NAME})
+        if(NOT ${NAME}_POPULATED)
+            FetchContent_Populate(${NAME})
+            add_subdirectory(${${NAME}_SOURCE_DIR} ${${NAME}_BINARY_DIR})
+        endif()
+    endmacro()
+endif()
 # ==============================================================================
 #   FIND LIBRARIES 
 # ==============================================================================
-
 set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS ON)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake" ${CMAKE_MODULE_PATH})
 set( CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/site-macros/Modules ${CMAKE_MODULE_PATH})
+FetchContent_Declare(
+  doctest
+  GIT_REPOSITORY https://github.com/onqtam/doctest.git
+  GIT_TAG        2.4.0)
+FetchContent_MakeAvailable(doctest)
+message(STATUS "SHIV")
+message(STATUS ${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
+include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
 find_package( BLAS REQUIRED )
 find_package( LAPACK REQUIRED )
 #find_package( FORTRANRTL REQUIRED )
 find_package( Threads )  # for lapack on some platforms
 # todo: cross platform and compiler check this:
 list(APPEND LAPACK_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} )
-find_package(doctest required)
 # ==============================================================================
 #  SOURCE AND TARGET
 # ==============================================================================
-
 add_library( piscesf
   src/lbfgs.f
   )
